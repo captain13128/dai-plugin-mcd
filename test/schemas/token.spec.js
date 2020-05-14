@@ -5,7 +5,7 @@ import {
   mineBlocks,
   TestAccountProvider
 } from '@makerdao/test-helpers';
-import { ETH, BAT, MDAI, MWETH, ALLOWANCE_AMOUNT } from '../../src';
+import { ETH, BAT, MMCR, MWETH, ALLOWANCE_AMOUNT } from '../../src';
 import BigNumber from 'bignumber.js';
 import { ServiceRoles } from '../../src/constants';
 
@@ -20,10 +20,10 @@ import tokenSchemas from '../../src/schemas/token';
 let maker, snapshotData, address, address2, proxyAddress;
 
 const ETH_A_COLLATERAL_AMOUNT = ETH(1);
-const ETH_A_DEBT_AMOUNT = MDAI(1);
+const ETH_A_DEBT_AMOUNT = MMCR(1);
 
 const BAT_A_COLLATERAL_AMOUNT = BAT(1);
-const BAT_A_DEBT_AMOUNT = MDAI(1);
+const BAT_A_DEBT_AMOUNT = MMCR(1);
 
 beforeAll(async () => {
   maker = await mcdMaker({
@@ -60,10 +60,10 @@ test(TOKEN_BALANCE, async () => {
   expect(ethBalance.toBigNumber()).toEqual(BigNumber('100'));
   expect(batBalance.toBigNumber()).toEqual(BigNumber('1000'));
 
-  const daiBalance = await maker.latest(TOKEN_BALANCE, address, 'DAI');
+  const daiBalance = await maker.latest(TOKEN_BALANCE, address, 'MCR');
   const wethBalance = await maker.latest(TOKEN_BALANCE, address, 'WETH');
 
-  expect(daiBalance.symbol).toEqual('MDAI');
+  expect(daiBalance.symbol).toEqual('MMCR');
   expect(wethBalance.symbol).toEqual('MWETH');
 
   try {
@@ -75,11 +75,11 @@ test(TOKEN_BALANCE, async () => {
   }
 
   try {
-    await maker.latest(TOKEN_BALANCE, address, 'DSR-DAI');
+    await maker.latest(TOKEN_BALANCE, address, 'DSR-MCR');
   } catch (e) {
     expect(e).toEqual(
       Error(
-        "Balance of DAI in savings cannot be retrieved from a token contract call. To get DAI balance in savings call 'balance('DSR-DAI')'"
+        "Balance of MCR in savings cannot be retrieved from a token contract call. To get MCR balance in savings call 'balance('DSR-MCR')'"
       )
     );
   }

@@ -146,7 +146,7 @@ var CdpTypeService = /*#__PURE__*/function (_PublicService) {
       return prefetchAllCdpTypes;
     }() //--system-wide functions
     //these functions should probably be moved to the system data service, but need to resolve circular dependency between cdpTypeService and SystemDataService first
-    //this should equal the total dai supply as long as we account for all cdpTypes/ilks
+    //this should equal the total mcr supply as long as we account for all cdpTypes/ilks
 
   }, {
     key: "totalDebtAllCdpTypes",

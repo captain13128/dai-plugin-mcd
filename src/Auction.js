@@ -1,14 +1,14 @@
 import { WAD } from './constants';
 import BigNumber from 'bignumber.js';
-import { MDAI } from './index';
+import { MMCR } from './index';
 
 export default class Auction {
   constructor(ilk, smartContractService) {
     switch (ilk) {
-      case MDAI.symbol:
+      case MMCR.symbol:
         this.contract = smartContractService.getContract('MCD_FLAP');
         break;
-      case 'MKR':
+      case 'MDT':
         this.contract = smartContractService.getContract('MCD_FLOP');
         break;
       default:

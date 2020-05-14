@@ -1,5 +1,7 @@
 "use strict";
 
+import {MMCR} from "../../src";
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -193,7 +195,7 @@ var debtValue = {
     return {
       dependencies: [[_constants.ENCUMBERED_DEBT, [_constants.VAULT_TYPE, id], [_constants.VAULT_ADDRESS, id]], [_constants.DEBT_SCALING_FACTOR, [_constants.VAULT_TYPE, id]]],
       computed: function computed(encumberedDebt, debtScalingFactor) {
-        return (0, _.MDAI)(encumberedDebt).times(debtScalingFactor);
+        return (0, _.MMCR)(encumberedDebt).times(debtScalingFactor);
       }
     };
   }
@@ -404,7 +406,7 @@ var balance = {
   generate: function generate(symbol, address) {
     return {
       dependencies: function dependencies() {
-        if (symbol === 'DSR-DAI') {
+        if (symbol === 'DSR-MCR') {
           return [[_constants.DAI_LOCKED_IN_DSR, address]];
         }
 
@@ -496,7 +498,7 @@ var collateralDebt = {
     return {
       dependencies: [[_constants.TOTAL_ENCUMBERED_DEBT, collateralTypeName], [_constants.DEBT_SCALING_FACTOR, collateralTypeName]],
       computed: function computed(totalEncumberedDebt, debtScalingFactor) {
-        return (0, _.MDAI)(totalEncumberedDebt).times(debtScalingFactor);
+        return (0, _.MMCR)(totalEncumberedDebt).times(debtScalingFactor);
       }
     };
   }

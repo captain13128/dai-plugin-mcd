@@ -1,11 +1,13 @@
 "use strict";
 
+import {MMCR} from "../src";
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.McdPlugin = exports.defaultTokens = exports.ALLOWANCE_AMOUNT = exports.SAI = exports.defaultCdpTypes = exports.USDC = exports.GNT = exports.DGD = exports.BAT = exports.OMG = exports.ZRX = exports.REP = exports.DSR_DAI = exports.MDAI = exports.MWETH = exports.USD_ETH = exports.USD = exports.MKR = exports.ETH = exports.ServiceRoles = void 0;
+exports["default"] = exports.McdPlugin = exports.defaultTokens = exports.ALLOWANCE_AMOUNT = exports.SAI = exports.defaultCdpTypes = exports.USDC = exports.GNT = exports.DGD = exports.BAT = exports.OMG = exports.ZRX = exports.REP = exports.DSR_MCR = exports.MMCR = exports.MWETH = exports.USD_ETH = exports.USD = exports.MDT = exports.ETH = exports.ServiceRoles = void 0;
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
@@ -83,8 +85,8 @@ var addContracts = (0, _reduce["default"])(_testnet["default"], function (result
 }, {});
 var ETH = (0, _currency.createCurrency)('ETH');
 exports.ETH = ETH;
-var MKR = (0, _currency.createCurrency)('MKR');
-exports.MKR = MKR;
+var MDT = (0, _currency.createCurrency)('MDT');
+exports.MDT = MDT;
 var USD = (0, _currency.createCurrency)('USD');
 exports.USD = USD;
 var USD_ETH = (0, _currency.createCurrencyRatio)(USD, ETH); // these are prefixed with M so that they don't override their SCD versions--
@@ -94,11 +96,11 @@ var USD_ETH = (0, _currency.createCurrencyRatio)(USD, ETH); // these are prefixe
 exports.USD_ETH = USD_ETH;
 var MWETH = (0, _currency.createCurrency)('MWETH');
 exports.MWETH = MWETH;
-var MDAI = (0, _currency.createCurrency)('MDAI'); // Casting for savings dai
+var MMCR = (0, _currency.createCurrency)('MMCR'); // Casting for savings mcr
 
-exports.MDAI = MDAI;
-var DSR_DAI = (0, _currency.createCurrency)('DSR-DAI');
-exports.DSR_DAI = DSR_DAI;
+exports.MMCR = MMCR;
+var DSR_MCR = (0, _currency.createCurrency)('DSR-MCR');
+exports.DSR_MCR = DSR_DAI;
 var REP = (0, _currency.createCurrency)('REP');
 exports.REP = REP;
 var ZRX = (0, _currency.createCurrency)('ZRX');
@@ -131,7 +133,7 @@ var ALLOWANCE_AMOUNT = (0, _bignumber["default"])('0xfffffffffffffffffffffffffff
 exports.ALLOWANCE_AMOUNT = ALLOWANCE_AMOUNT;
 var defaultTokens = (0, _toConsumableArray2["default"])(new Set([].concat((0, _toConsumableArray2["default"])(defaultCdpTypes.map(function (type) {
   return type.currency;
-})), [MDAI, MWETH, SAI, DSR_DAI])));
+})), [MMCR, MWETH, SAI, DSR_DAI])));
 exports.defaultTokens = defaultTokens;
 var McdPlugin = {
   addConfig: function addConfig(_) {
@@ -180,7 +182,7 @@ var McdPlugin = {
       },
       token: {
         erc20: [{
-          currency: MDAI,
+          currency: MMCR,
           address: addContracts.MCD_DAI.address
         }, {
           currency: MWETH,

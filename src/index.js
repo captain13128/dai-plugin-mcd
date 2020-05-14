@@ -50,7 +50,7 @@ let addContracts = reduce(
 );
 
 export const ETH = createCurrency('ETH');
-export const MKR = createCurrency('MKR');
+export const MDT = createCurrency('MDT');
 export const USD = createCurrency('USD');
 export const USD_ETH = createCurrencyRatio(USD, ETH);
 
@@ -58,10 +58,10 @@ export const USD_ETH = createCurrencyRatio(USD, ETH);
 // otherwise, adding the MCD plugin would break MCD. maybe there's a better way
 // to work around this?
 export const MWETH = createCurrency('MWETH');
-export const MDAI = createCurrency('MDAI');
+export const MMCR = createCurrency('MMCR');
 
-// Casting for savings dai
-export const DSR_DAI = createCurrency('DSR-DAI');
+// Casting for savings mcr
+export const DSR_MCR = createCurrency('DSR-MCR');
 
 export const REP = createCurrency('REP');
 export const ZRX = createCurrency('ZRX');
@@ -86,7 +86,7 @@ export const ALLOWANCE_AMOUNT = BigNumber(
 export const defaultTokens = [
   ...new Set([
     ...defaultCdpTypes.map(type => type.currency),
-    MDAI,
+    MMCR,
     MWETH,
     SAI,
     DSR_DAI
@@ -125,7 +125,7 @@ export const McdPlugin = {
       smartContract: { addContracts },
       token: {
         erc20: [
-          { currency: MDAI, address: addContracts.MCD_DAI.address },
+          { currency: MMCR, address: addContracts.MCD_DAI.address },
           { currency: MWETH, address: addContracts.ETH.address },
           ...tokens
         ]

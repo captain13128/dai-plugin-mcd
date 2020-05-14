@@ -1,5 +1,7 @@
 "use strict";
 
+import {MMCR} from "../src";
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -33,7 +35,7 @@ var _index = require("./index");
 // e.g. the fourth argument of `price`
 // ilk math
 function debtCeiling(line) {
-  return _index.MDAI.rad(line);
+  return _index.MMCR.rad(line);
 }
 
 function liquidationPenalty(chop) {
@@ -41,7 +43,7 @@ function liquidationPenalty(chop) {
 }
 
 function liquidationRatio(mat) {
-  var ratio = (0, _currency.createCurrencyRatio)(_index.USD, _index.MDAI);
+  var ratio = (0, _currency.createCurrencyRatio)(_index.USD, _index.MMCR);
   return ratio(new _bignumber["default"](mat.toString()).dividedBy(_constants.RAY).toString());
 }
 
@@ -75,13 +77,13 @@ function collateralValue(collateralAmount, price) {
 }
 
 function debtValue(art, rate) {
-  art = _index.MDAI.wei(art);
+  art = _index.MMCR.wei(art);
   return art.times(rate).shiftedBy(-27);
 }
 
 function collateralizationRatio(collateralValue, debtValue) {
   if (debtValue.eq(0)) {
-    var ratio = (0, _currency.createCurrencyRatio)(_index.USD, _index.MDAI);
+    var ratio = (0, _currency.createCurrencyRatio)(_index.USD, _index.MMCR);
     return ratio(Infinity);
   }
 
@@ -103,5 +105,5 @@ function minSafeCollateralAmount(debtValue, liquidationRatio, price) {
 
 function daiAvailable(collateralValue, debtValue, liquidationRatio) {
   var maxSafeDebtValue = collateralValue.div(liquidationRatio);
-  return debtValue.lt(maxSafeDebtValue) ? (0, _index.MDAI)(maxSafeDebtValue.minus(debtValue)) : (0, _index.MDAI)(0);
+  return debtValue.lt(maxSafeDebtValue) ? (0, _index.MMCR)(maxSafeDebtValue.minus(debtValue)) : (0, _index.MMCR)(0);
 }

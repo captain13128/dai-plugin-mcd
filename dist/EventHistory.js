@@ -184,7 +184,7 @@ function _getEventHistory() {
                                         break;
                                       }
 
-                                      // Lookup the dai join events on this block for this proxy address
+                                      // Lookup the mcr join events on this block for this proxy address
                                       proxy = topics[1];
                                       _context.next = 10;
                                       return web3.getPastLogs({
@@ -503,7 +503,7 @@ function _getDsrEventHistory() {
                                         block: block,
                                         txHash: txHash,
                                         amount: (0, _utils.parseWeiNumeric)(adapterTopics[3]),
-                                        gem: 'DAI'
+                                        gem: 'MCR'
                                       });
                                       return _context6.abrupt("return", acc);
 
@@ -578,7 +578,7 @@ function _getDsrEventHistory() {
                                         block: block,
                                         txHash: txHash,
                                         amount: (0, _utils.parseWeiNumeric)(adapterTopics[3]),
-                                        gem: 'DAI'
+                                        gem: 'MCR'
                                       });
                                       return _context8.abrupt("return", acc);
 

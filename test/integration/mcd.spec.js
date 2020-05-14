@@ -1,6 +1,6 @@
 import { mcdMaker } from '../helpers';
 import { ServiceRoles } from '../../src/constants';
-import { ETH, MDAI } from '../../src';
+import { ETH, MMCR } from '../../src';
 import { uniqueId } from '../../src/utils/index';
 import debug from 'debug';
 import { infuraProjectId } from './index';
@@ -8,7 +8,7 @@ import { infuraProjectId } from './index';
 const { CDP_MANAGER } = ServiceRoles;
 const log = debug('mcd:testing:integration');
 
-let maker, dai, proxy, txMgr;
+let maker, mcr, proxy, txMgr;
 
 beforeAll(async () => {
   if (!process.env.PRIVATE_KEY && process.env.NETWORK !== 'test') {
@@ -35,7 +35,7 @@ beforeAll(async () => {
 
   await maker.authenticate();
 
-  dai = maker.getToken(MDAI);
+  mcr = maker.getToken(MMCR);
   proxy = await maker.currentProxy();
 
   txMgr = maker.service('transactionManager');
@@ -59,7 +59,7 @@ async function expectValues(cdp, { collateral, debt, myGem, myDai }) {
     expect(await cdp.getCollateralAmount()).toEqual(cdp.currency(collateral));
   }
   if (debt !== undefined) {
-    expect(await cdp.getDebtValue()).toEqual(MDAI(debt));
+    expect(await cdp.getDebtValue()).toEqual(MMCR(debt));
   }
   if (myGem !== undefined) {
     const balance = await maker.getToken(cdp.currency).balance();
@@ -72,7 +72,7 @@ async function expectValues(cdp, { collateral, debt, myGem, myDai }) {
     }
   }
   if (myDai !== undefined) {
-    expect(await dai.balance()).toEqual(myDai);
+    expect(await mcr.balance()).toEqual(myDai);
   }
 }
 
@@ -93,8 +93,8 @@ describe.each(scenarios)('%s', (ilk, GEM) => {
 
   test('openLock, lock, lockAndDraw, free', async () => {
     startingGemBalance = await maker.getToken(GEM).balance();
-    startingDaiBalance = await dai.balance();
-    await dai.approveUnlimited(proxy);
+    startingDaiBalance = await mcr.balance();
+    await mcr.approveUnlimited(proxy);
     const cdp = await maker
       .service(CDP_MANAGER)
       .openLockAndDraw(ilk, GEM(0.01));
@@ -129,9 +129,9 @@ describe.each(scenarios)('%s', (ilk, GEM) => {
     const txStates = ['pending', 'mined', 'confirmed'];
     const mgr = maker.service(CDP_MANAGER);
     startingGemBalance = await maker.getToken(GEM).balance();
-    startingDaiBalance = await dai.balance();
-    await dai.approveUnlimited(proxy);
-    const cdp = await mgr.openLockAndDraw(ilk, GEM(0.01), MDAI(0.1));
+    startingDaiBalance = await mcr.balance();
+    await mcr.approveUnlimited(proxy);
+    const cdp = await mgr.openLockAndDraw(ilk, GEM(0.01), MMCR(0.1));
     await expectValues(cdp, {
       collateral: 0.01,
       debt: 0.1,
@@ -172,7 +172,7 @@ describe.each(scenarios)('%s', (ilk, GEM) => {
       myDai: startingDaiBalance.plus(0.15)
     });
 
-    await cdp.wipeAndFree(MDAI(0.1), GEM(0.005));
+    await cdp.wipeAndFree(MMCR(0.1), GEM(0.005));
     await expectValues(cdp, {
       collateral: 0.005,
       debt: 0.05,

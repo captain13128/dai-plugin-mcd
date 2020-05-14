@@ -44,11 +44,11 @@ exports.ALLOWANCE_AMOUNT = ALLOWANCE_AMOUNT;
 var tokenBalance = {
   generate: function generate(address, symbol) {
     if (symbol === 'WETH') symbol = 'MWETH';
-    if (symbol === 'DAI') symbol = 'MDAI';
+    if (symbol === 'MCR') symbol = 'MMCR';
     var currencyToken = (0, _utils.getMcdToken)(symbol);
-    var contract = symbol === 'MDAI' ? 'MCD_DAI' : symbol === 'MWETH' ? 'ETH' : symbol;
+    var contract = symbol === 'MMCR' ? 'MMCR' : symbol === 'MWETH' ? 'ETH' : symbol;
     if (!currencyToken) throw new Error("".concat(symbol, " token is not part of the default tokens list"));
-    if (symbol === 'DSR-DAI') throw new Error("Balance of DAI in savings cannot be retrieved from a token contract call. To get DAI balance in savings call 'balance('DSR-DAI')'");
+    if (symbol === 'DSR-MCR') throw new Error("Balance of MCR in savings cannot be retrieved from a token contract call. To get MCR balance in savings call 'balance('DSR-MCR')'");
     return {
       id: "balance.".concat(symbol, ".").concat(address),
       contract: symbol === 'ETH' ? 'MULTICALL' : contract,
@@ -85,10 +85,10 @@ exports.tokenBalances = tokenBalances;
 var tokenAllowanceBase = {
   generate: function generate(address, proxyAddress, symbol) {
     if (symbol === 'WETH') symbol = 'MWETH';
-    if (symbol === 'DAI') symbol = 'MDAI';
-    if (symbol === 'ETH' || symbol === 'DSR-DAI') throw new Error("".concat(symbol, " does not require an allowance to be set"));
+    if (symbol === 'MCR') symbol = 'MMCR';
+    if (symbol === 'ETH' || symbol === 'DSR-MCR') throw new Error("".concat(symbol, " does not require an allowance to be set"));
     var currencyToken = (0, _utils.getMcdToken)(symbol);
-    var contract = symbol === 'MDAI' ? 'MCD_DAI' : symbol === 'MWETH' ? 'ETH' : symbol;
+    var contract = symbol === 'MMCR' ? 'MCD_DAI' : symbol === 'MWETH' ? 'ETH' : symbol;
     if (!currencyToken) throw new Error("".concat(symbol, " token is not part of the default tokens list"));
     return {
       id: "allowance.".concat(symbol, ".").concat(address),
@@ -122,7 +122,7 @@ var adapterBalance = {
     return {
       dependencies: function dependencies(_ref) {
         var get = _ref.get;
-        collateralTypeName = collateralTypeName === 'MDAI' ? 'DAI' : collateralTypeName;
+        collateralTypeName = collateralTypeName === 'MMCR' ? 'MCR' : collateralTypeName;
         var tokenSymbol = collateralTypeName.split('-')[0];
         tokenSymbol = tokenSymbol === 'ETH' ? 'MWETH' : tokenSymbol;
         return [[_constants.TOKEN_BALANCE, get('smartContract').getContractAddress("MCD_JOIN_".concat(collateralTypeName.replace('-', '_'))), tokenSymbol]];

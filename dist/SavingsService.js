@@ -1,5 +1,7 @@
 "use strict";
 
+import {MMCR} from "../src";
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -165,7 +167,7 @@ var SavingsService = (_class = /*#__PURE__*/function (_PublicService) {
 
               case 2:
                 proxy = _context4.sent;
-                return _context4.abrupt("return", proxy ? this.balanceOf(proxy) : (0, _index.MDAI)(0));
+                return _context4.abrupt("return", proxy ? this.balanceOf(proxy) : (0, _index.MMCR)(0));
 
               case 4:
               case "end":
@@ -202,7 +204,7 @@ var SavingsService = (_class = /*#__PURE__*/function (_PublicService) {
 
               case 7:
                 chi = _context5.sent;
-                return _context5.abrupt("return", (0, _index.MDAI)(slice.times(chi).div(_constants.WAD).dp(18)));
+                return _context5.abrupt("return", (0, _index.MMCR)(slice.times(chi).div(_constants.WAD).dp(18)));
 
               case 9:
               case "end":
@@ -239,7 +241,7 @@ var SavingsService = (_class = /*#__PURE__*/function (_PublicService) {
 
               case 7:
                 chi = _context6.sent;
-                return _context6.abrupt("return", (0, _index.MDAI)(totalPie.times(chi).div(_constants.WAD).dp(18)));
+                return _context6.abrupt("return", (0, _index.MMCR)(totalPie.times(chi).div(_constants.WAD).dp(18)));
 
               case 9:
               case "end":
@@ -350,7 +352,7 @@ var SavingsService = (_class = /*#__PURE__*/function (_PublicService) {
 
               case 8:
                 balance = _context9.sent;
-                return _context9.abrupt("return", balance.gt(sum) ? balance.minus(sum) : (0, _index.MDAI)(0));
+                return _context9.abrupt("return", balance.gt(sum) ? balance.minus(sum) : (0, _index.MMCR)(0));
 
               case 10:
               case "end":
@@ -385,7 +387,7 @@ var SavingsService = (_class = /*#__PURE__*/function (_PublicService) {
   }, {
     key: "_daiAdapterAddress",
     get: function get() {
-      return this.get(_constants.ServiceRoles.SYSTEM_DATA).adapterAddress('DAI');
+      return this.get(_constants.ServiceRoles.SYSTEM_DATA).adapterAddress('MCR');
     }
   }]);
   return SavingsService;

@@ -11,16 +11,16 @@ export const ALLOWANCE_AMOUNT = BigNumber(
 export const tokenBalance = {
   generate: (address, symbol) => {
     if (symbol === 'WETH') symbol = 'MWETH';
-    if (symbol === 'DAI') symbol = 'MDAI';
+    if (symbol === 'MCR') symbol = 'MMCR';
 
     const currencyToken = getMcdToken(symbol);
     const contract =
-      symbol === 'MDAI' ? 'MCD_DAI' : symbol === 'MWETH' ? 'ETH' : symbol;
+      symbol === 'MMCR' ? 'MCD_MCR' : symbol === 'MWETH' ? 'ETH' : symbol;
     if (!currencyToken)
       throw new Error(`${symbol} token is not part of the default tokens list`);
-    if (symbol === 'DSR-DAI')
+    if (symbol === 'DSR-MCR')
       throw new Error(
-        "Balance of DAI in savings cannot be retrieved from a token contract call. To get DAI balance in savings call 'balance('DSR-DAI')'"
+        "Balance of MCR in savings cannot be retrieved from a token contract call. To get MCR balance in savings call 'balance('DSR-MCR')'"
       );
 
     return {
@@ -56,13 +56,13 @@ export const tokenBalances = {
 export const tokenAllowanceBase = {
   generate: (address, proxyAddress, symbol) => {
     if (symbol === 'WETH') symbol = 'MWETH';
-    if (symbol === 'DAI') symbol = 'MDAI';
-    if (symbol === 'ETH' || symbol === 'DSR-DAI')
+    if (symbol === 'MCR') symbol = 'MMCR';
+    if (symbol === 'ETH' || symbol === 'DSR-MCR')
       throw new Error(`${symbol} does not require an allowance to be set`);
 
     const currencyToken = getMcdToken(symbol);
     const contract =
-      symbol === 'MDAI' ? 'MCD_DAI' : symbol === 'MWETH' ? 'ETH' : symbol;
+      symbol === 'MMCR' ? 'MCD_MCR' : symbol === 'MWETH' ? 'ETH' : symbol;
     if (!currencyToken)
       throw new Error(`${symbol} token is not part of the default tokens list`);
 
@@ -99,7 +99,7 @@ export const adapterBalance = {
   generate: collateralTypeName => ({
     dependencies: ({ get }) => {
       collateralTypeName =
-        collateralTypeName === 'MDAI' ? 'DAI' : collateralTypeName;
+        collateralTypeName === 'MMCR' ? 'MCR' : collateralTypeName;
       let tokenSymbol = collateralTypeName.split('-')[0];
       tokenSymbol = tokenSymbol === 'ETH' ? 'MWETH' : tokenSymbol;
       return [

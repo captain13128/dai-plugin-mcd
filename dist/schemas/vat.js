@@ -1,5 +1,7 @@
 "use strict";
 
+import {MMCR} from "../../src";
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -20,7 +22,7 @@ var vatIlks = {
     };
   },
   returns: [[_constants.TOTAL_ENCUMBERED_DEBT, _utils.fromWei], [_constants.DEBT_SCALING_FACTOR, _utils.fromRay], [_constants.PRICE_WITH_SAFETY_MARGIN, _utils.fromRay], [_constants.DEBT_CEILING, function (v) {
-    return (0, _.MDAI)(v, 'rad');
+    return (0, _.MMCR)(v, 'rad');
   }], [_constants.DEBT_FLOOR, _utils.fromRad]]
 };
 exports.vatIlks = vatIlks;
@@ -33,7 +35,7 @@ var vatDebt = {
     };
   },
   returns: [[_constants.TOTAL_DAI_SUPPLY, function (v) {
-    return (0, _.MDAI)(v, 'rad');
+    return (0, _.MMCR)(v, 'rad');
   }]]
 };
 exports.vatDebt = vatDebt;
@@ -68,7 +70,7 @@ var vatLine = {
     };
   },
   returns: [[_constants.GLOBAL_DEBT_CEILING, function (v) {
-    return (0, _.MDAI)(v, 'rad');
+    return (0, _.MMCR)(v, 'rad');
   }]]
 };
 exports.vatLine = vatLine;

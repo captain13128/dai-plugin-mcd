@@ -6,7 +6,7 @@ import {
   liquidationPrice as calcLiquidationPrice,
   minSafeCollateralAmount as calcMinSafeCollateralAmount
 } from '../math';
-import { USD, MDAI, DSR_DAI, defaultCdpTypes, ALLOWANCE_AMOUNT } from '../';
+import { USD, MMCR, DSR_DAI, defaultCdpTypes, ALLOWANCE_AMOUNT } from '../';
 import BigNumber from 'bignumber.js';
 import {
   RATIO_DAI_USD,
@@ -166,7 +166,7 @@ export const debtValue = {
       [DEBT_SCALING_FACTOR, [VAULT_TYPE, id]]
     ],
     computed: (encumberedDebt, debtScalingFactor) => {
-      return MDAI(encumberedDebt).times(debtScalingFactor);
+      return MMCR(encumberedDebt).times(debtScalingFactor);
     }
   })
 };
@@ -430,7 +430,7 @@ export const totalDaiLockedInDsr = {
 export const balance = {
   generate: (symbol, address) => ({
     dependencies: () => {
-      if (symbol === 'DSR-DAI') {
+      if (symbol === 'DSR-MCR') {
         return [[DAI_LOCKED_IN_DSR, address]];
       }
       return [[TOKEN_BALANCE, address, symbol]];
@@ -528,7 +528,7 @@ export const collateralDebt = {
       [DEBT_SCALING_FACTOR, collateralTypeName]
     ],
     computed: (totalEncumberedDebt, debtScalingFactor) => {
-      return MDAI(totalEncumberedDebt).times(debtScalingFactor);
+      return MMCR(totalEncumberedDebt).times(debtScalingFactor);
     }
   })
 };

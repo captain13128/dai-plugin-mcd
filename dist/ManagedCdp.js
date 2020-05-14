@@ -1,5 +1,7 @@
 "use strict";
 
+import {MMCR} from "../src";
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -87,14 +89,14 @@ var ManagedCdp = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
     key: "lockAndDraw",
     value: function lockAndDraw() {
       var lockAmount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.currency(0);
-      var drawAmount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (0, _index.MDAI)(0);
+      var drawAmount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (0, _index.MMCR)(0);
 
       var _ref3 = arguments.length > 2 ? arguments[2] : undefined,
           promise = _ref3.promise;
 
       (0, _assert["default"])(lockAmount && drawAmount, 'amounts must be defined');
       lockAmount = (0, _utils.castAsCurrency)(lockAmount, this.currency);
-      drawAmount = (0, _utils.castAsCurrency)(drawAmount, _index.MDAI);
+      drawAmount = (0, _utils.castAsCurrency)(drawAmount, _index.MMCR);
       return this._cdpManager.lockAndDraw(this.id, this.ilk, lockAmount, drawAmount, {
         promise: promise
       });
@@ -102,13 +104,13 @@ var ManagedCdp = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
   }, {
     key: "wipeDai",
     value: function wipeDai(amount) {
-      amount = (0, _utils.castAsCurrency)(amount, _index.MDAI);
+      amount = (0, _utils.castAsCurrency)(amount, _index.MMCR);
       return this._cdpManager.wipe(this.id, amount, null);
     }
   }, {
     key: "unsafeWipe",
     value: function unsafeWipe(amount) {
-      amount = (0, _utils.castAsCurrency)(amount, _index.MDAI);
+      amount = (0, _utils.castAsCurrency)(amount, _index.MMCR);
       return this._cdpManager.unsafeWipe(this.id, amount);
     }
   }, {
@@ -139,14 +141,14 @@ var ManagedCdp = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
   }, {
     key: "wipeAndFree",
     value: function wipeAndFree() {
-      var wipeAmount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _index.MDAI)(0);
+      var wipeAmount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : (0, _index.MMCR)(0);
       var freeAmount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.currency(0);
 
       var _ref4 = arguments.length > 2 ? arguments[2] : undefined,
           promise = _ref4.promise;
 
       (0, _assert["default"])(wipeAmount && freeAmount, 'amounts must be defined');
-      wipeAmount = (0, _utils.castAsCurrency)(wipeAmount, _index.MDAI);
+      wipeAmount = (0, _utils.castAsCurrency)(wipeAmount, _index.MMCR);
       freeAmount = (0, _utils.castAsCurrency)(freeAmount, this.currency);
       return this._cdpManager.wipeAndFree(this.id, this.ilk, wipeAmount, freeAmount, {
         promise: promise

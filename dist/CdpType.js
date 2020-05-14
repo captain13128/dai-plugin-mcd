@@ -1,5 +1,7 @@
 "use strict";
 
+import {MMCR} from "../src";
+
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -166,7 +168,7 @@ var CdpType = /*#__PURE__*/function () {
           Art = _this$_getCached.Art,
           rate = _this$_getCached.rate;
 
-      return _index.MDAI.wei(Art).times(rate).shiftedBy(-27);
+      return _index.MMCR.wei(Art).times(rate).shiftedBy(-27);
     }
   }, {
     key: "debtCeiling",

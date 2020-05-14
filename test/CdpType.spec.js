@@ -1,7 +1,7 @@
 import { createCurrencyRatio } from '@makerdao/currency';
 import { mcdMaker, setupCollateral } from './helpers';
 import { ServiceRoles } from '../src/constants';
-import { ETH, MDAI, USD, BAT } from '../src';
+import { ETH, MMCR, USD, BAT } from '../src';
 const { CDP_MANAGER, CDP_TYPE } = ServiceRoles;
 
 let maker, service;
@@ -57,7 +57,7 @@ describe.each(scenarios)('%s', (ilk, GEM) => {
   });
 
   test('get debt ceiling', () => {
-    expect(cdpType.debtCeiling).toEqual(MDAI(systemValues[ilk][2]));
+    expect(cdpType.debtCeiling).toEqual(MMCR(systemValues[ilk][2]));
   });
 
   test('get liquidation ratio', () => {

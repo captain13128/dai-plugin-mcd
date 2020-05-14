@@ -4,7 +4,7 @@ import tracksTransactions, {
 } from './utils/tracksTransactions';
 import { ServiceRoles } from './constants';
 import assert from 'assert';
-import { MDAI } from './index';
+import { MMCR } from './index';
 import * as math from './math';
 
 export default class ManagedCdp {
@@ -95,12 +95,12 @@ export default class ManagedCdp {
   @tracksTransactionsWithOptions({ numArguments: 3 })
   lockAndDraw(
     lockAmount = this.currency(0),
-    drawAmount = MDAI(0),
+    drawAmount = MMCR(0),
     { promise }
   ) {
     assert(lockAmount && drawAmount, 'amounts must be defined');
     lockAmount = castAsCurrency(lockAmount, this.currency);
-    drawAmount = castAsCurrency(drawAmount, MDAI);
+    drawAmount = castAsCurrency(drawAmount, MMCR);
     return this._cdpManager.lockAndDraw(
       this.id,
       this.ilk,
@@ -111,12 +111,12 @@ export default class ManagedCdp {
   }
 
   wipeDai(amount) {
-    amount = castAsCurrency(amount, MDAI);
+    amount = castAsCurrency(amount, MMCR);
     return this._cdpManager.wipe(this.id, amount, null);
   }
 
   unsafeWipe(amount) {
-    amount = castAsCurrency(amount, MDAI);
+    amount = castAsCurrency(amount, MMCR);
     return this._cdpManager.unsafeWipe(this.id, amount);
   }
 
@@ -142,12 +142,12 @@ export default class ManagedCdp {
 
   @tracksTransactionsWithOptions({ numArguments: 3 })
   wipeAndFree(
-    wipeAmount = MDAI(0),
+    wipeAmount = MMCR(0),
     freeAmount = this.currency(0),
     { promise }
   ) {
     assert(wipeAmount && freeAmount, 'amounts must be defined');
-    wipeAmount = castAsCurrency(wipeAmount, MDAI);
+    wipeAmount = castAsCurrency(wipeAmount, MMCR);
     freeAmount = castAsCurrency(freeAmount, this.currency);
     return this._cdpManager.wipeAndFree(
       this.id,

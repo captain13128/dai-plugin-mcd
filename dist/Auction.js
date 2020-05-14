@@ -1,5 +1,7 @@
 "use strict";
 
+import {MMCR} from "../src";
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -26,11 +28,11 @@ var Auction = /*#__PURE__*/function () {
     (0, _classCallCheck2["default"])(this, Auction);
 
     switch (ilk) {
-      case _index.MDAI.symbol:
+      case _index.MMCR.symbol:
         this.contract = smartContractService.getContract('MCD_FLAP');
         break;
 
-      case 'MKR':
+      case 'MDT':
         this.contract = smartContractService.getContract('MCD_FLOP');
         break;
 

@@ -1,5 +1,7 @@
 "use strict";
 
+import {MMCR} from "../src";
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -429,11 +431,11 @@ var CdpManager = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
           while (1) {
             switch (_context8.prev = _context8.next) {
               case 0:
-                drawAmount = _args8.length > 3 && _args8[3] !== undefined ? _args8[3] : (0, _index.MDAI)(0);
+                drawAmount = _args8.length > 3 && _args8[3] !== undefined ? _args8[3] : (0, _index.MMCR)(0);
                 _ref4 = _args8.length > 4 ? _args8[4] : undefined, promise = _ref4.promise;
                 (0, _assert["default"])(lockAmount && drawAmount, 'both amounts must be specified');
                 (0, _assert["default"])(lockAmount instanceof _currency.Currency, 'lockAmount must be a Currency value');
-                drawAmount = (0, _utils.castAsCurrency)(drawAmount, _index.MDAI);
+                drawAmount = (0, _utils.castAsCurrency)(drawAmount, _index.MMCR);
                 _context8.next = 7;
                 return this.get('proxy').ensureProxy({
                   promise: promise
@@ -445,7 +447,7 @@ var CdpManager = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
                 isEth = _index.ETH.isInstance(lockAmount);
                 isGnt = _index.GNT.isInstance(lockAmount);
                 method = setMethod(isEth, isGnt, id);
-                args = [this._managerAddress, jugAddress, this._adapterAddress(ilk), this._adapterAddress('DAI'), id || (0, _utils.stringToBytes)(ilk), !isEth && lockAmount.toFixed(this._precision(lockAmount)), drawAmount.toFixed('wei'), {
+                args = [this._managerAddress, jugAddress, this._adapterAddress(ilk), this._adapterAddress('MCR'), id || (0, _utils.stringToBytes)(ilk), !isEth && lockAmount.toFixed(this._precision(lockAmount)), drawAmount.toFixed('wei'), {
                   dsProxy: true,
                   value: isEth ? lockAmount.toFixed('wei') : 0,
                   promise: promise,
@@ -585,7 +587,7 @@ var CdpManager = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
             switch (_context10.prev = _context10.next) {
               case 0:
                 promise = _ref6.promise;
-                return _context10.abrupt("return", this.proxyActions.draw(this._managerAddress, this.get('smartContract').getContractAddress('MCD_JUG'), this._adapterAddress('DAI'), this.getIdBytes(id), (0, _utils.castAsCurrency)(drawAmount, _index.MDAI).toFixed('wei'), {
+                return _context10.abrupt("return", this.proxyActions.draw(this._managerAddress, this.get('smartContract').getContractAddress('MCD_JUG'), this._adapterAddress('MCR'), this.getIdBytes(id), (0, _utils.castAsCurrency)(drawAmount, _index.MMCR).toFixed('wei'), {
                   dsProxy: true,
                   promise: promise,
                   metadata: {
@@ -612,7 +614,7 @@ var CdpManager = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
   }, {
     key: "wipeAndFree",
     value: function wipeAndFree(id, ilk) {
-      var wipeAmount = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : (0, _index.MDAI)(0);
+      var wipeAmount = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : (0, _index.MMCR)(0);
       var freeAmount = arguments.length > 3 ? arguments[3] : undefined;
 
       var _ref7 = arguments.length > 4 ? arguments[4] : undefined,
@@ -621,7 +623,7 @@ var CdpManager = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
       var isEth = _index.ETH.isInstance(freeAmount);
 
       var method = isEth ? 'wipeAndFreeETH' : 'wipeAndFreeGem';
-      return this.proxyActions[method](this._managerAddress, this._adapterAddress(ilk), this._adapterAddress('DAI'), this.getIdBytes(id), freeAmount.toFixed(this._precision(freeAmount)), wipeAmount.toFixed('wei'), {
+      return this.proxyActions[method](this._managerAddress, this._adapterAddress(ilk), this._adapterAddress('MCR'), this.getIdBytes(id), freeAmount.toFixed(this._precision(freeAmount)), wipeAmount.toFixed('wei'), {
         dsProxy: true,
         promise: promise,
         metadata: {
@@ -655,7 +657,7 @@ var CdpManager = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
                 owner = _context11.sent;
 
               case 5:
-                return _context11.abrupt("return", this.proxyActions.safeWipe(this._managerAddress, this._adapterAddress('DAI'), this.getIdBytes(id), wipeAmount.toFixed('wei'), owner, {
+                return _context11.abrupt("return", this.proxyActions.safeWipe(this._managerAddress, this._adapterAddress('MCR'), this.getIdBytes(id), wipeAmount.toFixed('wei'), owner, {
                   dsProxy: true,
                   promise: promise,
                   metadata: {
@@ -682,7 +684,7 @@ var CdpManager = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
     key: "unsafeWipe",
     value: function unsafeWipe(id, wipeAmount, _ref9) {
       var promise = _ref9.promise;
-      return this.proxyActions.wipe(this._managerAddress, this._adapterAddress('DAI'), this.getIdBytes(id), wipeAmount.toFixed('wei'), {
+      return this.proxyActions.wipe(this._managerAddress, this._adapterAddress('MCR'), this.getIdBytes(id), wipeAmount.toFixed('wei'), {
         dsProxy: true,
         promise: promise,
         metadata: {
@@ -717,7 +719,7 @@ var CdpManager = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
                 owner = _context12.sent;
 
               case 5:
-                return _context12.abrupt("return", this.proxyActions.safeWipeAll(this._managerAddress, this._adapterAddress('DAI'), this.getIdBytes(id), owner, {
+                return _context12.abrupt("return", this.proxyActions.safeWipeAll(this._managerAddress, this._adapterAddress('MCR'), this.getIdBytes(id), owner, {
                   dsProxy: true,
                   promise: promise,
                   metadata: {
@@ -745,7 +747,7 @@ var CdpManager = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
       var _ref11 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
           promise = _ref11.promise;
 
-      return this.proxyActions.wipeAll(this._managerAddress, this._adapterAddress('DAI'), this.getIdBytes(id), {
+      return this.proxyActions.wipeAll(this._managerAddress, this._adapterAddress('MCR'), this.getIdBytes(id), {
         dsProxy: true,
         promise: promise,
         metadata: {
@@ -761,7 +763,7 @@ var CdpManager = (_dec = (0, _tracksTransactions.tracksTransactionsWithOptions)(
       var isEth = _index.ETH.isInstance(freeAmount);
 
       var method = isEth ? 'wipeAllAndFreeETH' : 'wipeAllAndFreeGem';
-      return this.proxyActions[method](this._managerAddress, this._adapterAddress(ilk), this._adapterAddress('DAI'), this.getIdBytes(id), freeAmount.toFixed(this._precision(freeAmount)), {
+      return this.proxyActions[method](this._managerAddress, this._adapterAddress(ilk), this._adapterAddress('MCR'), this.getIdBytes(id), freeAmount.toFixed(this._precision(freeAmount)), {
         dsProxy: true,
         promise: promise,
         metadata: {

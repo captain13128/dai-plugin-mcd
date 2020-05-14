@@ -1,5 +1,7 @@
 "use strict";
 
+import {MMCR} from "../../src";
+
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
@@ -46,7 +48,7 @@ var spotIlks = {
       contract: 'MCD_SPOT',
       call: ['ilks(bytes32)(address,uint256)', (0, _utils.toHex)(collateralTypeName)],
       transforms: (0, _defineProperty2["default"])({}, _constants.LIQUIDATION_RATIO, function (liqRatio) {
-        return liqRatio.toString() !== '0' ? (0, _currency.createCurrencyRatio)(_.USD, _.MDAI)((0, _utils.fromRay)(liqRatio)) : null;
+        return liqRatio.toString() !== '0' ? (0, _currency.createCurrencyRatio)(_.USD, _.MMCR)((0, _utils.fromRay)(liqRatio)) : null;
       })
     };
   },
@@ -65,7 +67,7 @@ var spotPar = {
     };
   },
   returns: [[_constants.RATIO_DAI_USD, function (v) {
-    return (0, _currency.createCurrencyRatio)(_.MDAI, _.USD)((0, _utils.fromRay)(v));
+    return (0, _currency.createCurrencyRatio)(_.MMCR, _.USD)((0, _utils.fromRay)(v));
   }]]
 };
 exports.spotPar = spotPar;

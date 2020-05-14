@@ -148,7 +148,7 @@ export default async function getEventHistory(cdpManager, managedCdp, cache) {
           dart = new BigNumber(dart);
           // Imprecise debt amount frobbed (not scaled by vat.ilks[ilk].rate)
           if (dart.lt(0) || dart.gt(0)) {
-            // Lookup the dai join events on this block for this proxy address
+            // Lookup the mcr join events on this block for this proxy address
             const proxy = topics[1];
             const joinDaiEvents = await web3.getPastLogs({
               address: [MCD_JOIN_DAI, MCD_JOIN_SAI],
@@ -365,7 +365,7 @@ export async function getDsrEventHistory(service, address, cache) {
               block,
               txHash,
               amount: parseWeiNumeric(adapterTopics[3]),
-              gem: 'DAI'
+              gem: 'MCR'
             });
             return acc;
           },
@@ -399,7 +399,7 @@ export async function getDsrEventHistory(service, address, cache) {
               block,
               txHash,
               amount: parseWeiNumeric(adapterTopics[3]),
-              gem: 'DAI'
+              gem: 'MCR'
             });
             return acc;
           },

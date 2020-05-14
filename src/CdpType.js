@@ -1,7 +1,7 @@
 import assert from 'assert';
 import { ServiceRoles } from './constants';
 import { stringToBytes } from './utils';
-import { MDAI, ETH, MWETH } from './index';
+import { MMCR, ETH, MWETH } from './index';
 import * as math from './math';
 
 export default class CdpType {
@@ -28,7 +28,7 @@ export default class CdpType {
 
   get totalDebt() {
     const { Art, rate } = this._getCached('vatInfo');
-    return MDAI.wei(Art)
+    return MMCR.wei(Art)
       .times(rate)
       .shiftedBy(-27);
   }
