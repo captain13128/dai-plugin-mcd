@@ -63,8 +63,8 @@ let maker,
   address,
   address2,
   proxyAddress,
-  expectedEthVaultAddress,
-  expectedBatVaultAddress;
+  expectedVaultAddress;
+
 const ETH_A_COLLATERAL_AMOUNT = ETH(1);
 const ETH_A_DEBT_AMOUNT = MDAI(1);
 const ETH_A_PRICE = 180;
@@ -120,19 +120,18 @@ beforeAll(async () => {
   proxyAddress = await maker.service('proxy').ensureProxy();
   await dai.approveUnlimited(proxyAddress);
 
-  let vault = await mgr.openLockAndDraw(
+  const vault = await mgr.openLockAndDraw(
     'ETH-A',
     ETH_A_COLLATERAL_AMOUNT,
     ETH_A_DEBT_AMOUNT
   );
-  expectedEthVaultAddress = await mgr.getUrn(vault.id);
+  expectedVaultAddress = await mgr.getUrn(vault.id);
 
-  vault = await mgr.openLockAndDraw(
+  await mgr.openLockAndDraw(
     'BAT-A',
     BAT_A_COLLATERAL_AMOUNT,
     BAT_A_DEBT_AMOUNT
   );
-  expectedBatVaultAddress = await mgr.getUrn(vault.id);
 
   await sav.join(MDAI(1));
 });
@@ -196,7 +195,7 @@ test(COLLATERAL_TYPES_PRICES, async () => {
   expect(batAPrice.symbol).toEqual('USD/BAT');
 });
 
-test.skip(DEFAULT_COLLATERAL_TYPES_PRICES, async () => {
+test(DEFAULT_COLLATERAL_TYPES_PRICES, async () => {
   const [ethAPrice, batAPrice] = await maker.latest(
     DEFAULT_COLLATERAL_TYPES_PRICES
   );
@@ -216,7 +215,7 @@ test(VAULT_TYPE_AND_ADDRESS, async () => {
     cdpId
   );
   expect(collateralType).toEqual(expectedVaultType);
-  expect(vaultAddress).toEqual(expectedEthVaultAddress);
+  expect(vaultAddress).toEqual(expectedVaultAddress);
 });
 
 test(VAULT_EXTERNAL_OWNER, async () => {
@@ -325,7 +324,7 @@ test(VAULT, async () => {
 
   expect(vault.id).toEqual(cdpId);
   expect(vault.vaultType).toEqual(expectedVaultType);
-  expect(vault.vaultAddress).toEqual(expectedEthVaultAddress);
+  expect(vault.vaultAddress).toEqual(expectedVaultAddress);
   expect(vault.ownerAddress).toEqual(expectedOwner);
   expect(vault.externalOwnerAddress.toLowerCase()).toEqual(
     expectedExternalOwner
@@ -461,8 +460,13 @@ test(USER_VAULTS_LIST, async () => {
   expect(batVault.vaultType).toEqual('BAT-A');
   expect(ethVault.vaultType).toEqual('ETH-A');
 
-  expect(batVault.vaultAddress).toEqual(expectedBatVaultAddress);
-  expect(ethVault.vaultAddress).toEqual(expectedEthVaultAddress);
+  // todo: make expected addresses dynamic
+  expect(batVault.vaultAddress).toEqual(
+    '0xB3BaD1Db5e2EF682Bdb7061708a50eb784A39635'
+  );
+  expect(ethVault.vaultAddress).toEqual(
+    '0x7fE39828aebf2e95aBb4d801Bb407fd824C74903'
+  );
 });
 
 test(`${USER_VAULTS_LIST} for account with no proxy`, async () => {

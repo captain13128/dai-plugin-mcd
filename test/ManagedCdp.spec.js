@@ -142,8 +142,7 @@ describe.each([
   [
     'USDC-A',
     USDC,
-    async () =>
-      setupCollateral(maker, 'USDC-A', { price: 100, debtCeiling: 50 })
+    async () => setupCollateral(maker, 'USDC-A', { price: 100, debtCeiling: 50 })
   ]
 ])('%s', (ilk, GEM, setup) => {
   let startingGemBalance, startingDaiBalance;

@@ -12,7 +12,7 @@ import {
 
 import getCdpsSchemas from '../../src/schemas/getCdps';
 
-let maker, snapshotData, proxyAddress, mgr, ethCdp, batCdp;
+let maker, snapshotData, proxyAddress;
 
 const ETH_A_COLLATERAL_AMOUNT = ETH(1);
 const ETH_A_DEBT_AMOUNT = MDAI(1);
@@ -26,7 +26,7 @@ beforeAll(async () => {
   maker = await mcdMaker({
     multicall: true
   });
-  mgr = await maker.service(ServiceRoles.CDP_MANAGER);
+  const mgr = await maker.service(ServiceRoles.CDP_MANAGER);
   const dai = maker.getToken(MDAI);
 
   snapshotData = await takeSnapshot(maker);
@@ -41,12 +41,12 @@ beforeAll(async () => {
 
   await dai.approveUnlimited();
 
-  ethCdp = await mgr.openLockAndDraw(
+  await mgr.openLockAndDraw(
     'ETH-A',
     ETH_A_COLLATERAL_AMOUNT,
     ETH_A_DEBT_AMOUNT
   );
-  batCdp = await mgr.openLockAndDraw(
+  await mgr.openLockAndDraw(
     'BAT-A',
     BAT_A_COLLATERAL_AMOUNT,
     BAT_A_DEBT_AMOUNT
@@ -75,8 +75,13 @@ test(USER_VAULT_ADDRESSES, async () => {
     proxyAddress
   );
 
-  expect(userVaultAddresses[0]).toEqual(await mgr.getUrn(batCdp.id));
-  expect(userVaultAddresses[1]).toEqual(await mgr.getUrn(ethCdp.id));
+  // todo: make expected addresses dynamic
+  expect(userVaultAddresses[0]).toEqual(
+    '0xB3BaD1Db5e2EF682Bdb7061708a50eb784A39635'
+  );
+  expect(userVaultAddresses[1]).toEqual(
+    '0x7fE39828aebf2e95aBb4d801Bb407fd824C74903'
+  );
 });
 
 test(USER_VAULT_TYPES, async () => {
